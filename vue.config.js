@@ -7,7 +7,10 @@ const glob = require('glob');
 const PAGE_PATH = 'src/pages';
 
 const webpack = require('webpack')
+// 引入 AddAssetHtmlPlugin 将构建好的 JS 文件插入到 html页面中
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+// 引入压缩插件
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 setPages = configs => {
   // handleEntry()
@@ -50,6 +53,7 @@ module.exports = {
         context: process.cwd(),
         manifest: require('./public/vendor/vendor-manifest.json')
       }),
+      // 给定的 JS 或 CSS 文件添加到 webpack 配置的文件中，并将其放入资源列表 html webpack插件注入到生成的 html 中
       new AddAssetHtmlPlugin({
         // dll文件位置
         filepath: path.resolve(__dirname, './public/vendor/*.js'),
@@ -58,6 +62,13 @@ module.exports = {
         // dll最终输出的目录
         outputPath: './vendor'
       }),
+      new CompressionWebpackPlugin({
+        filename: "[path].gz[query]",
+        algorithm: "gzip",
+        test: /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i,
+        threshold: 10240,
+        minRatio: 0.8
+    })
     ]
   },
   // devServer: {
