@@ -1,3 +1,4 @@
+const path = require('path');
 // glob 是 webpack 安装时依赖的一个第三方模块，该模块允许你使用 * 等符号,
 // 例如 lib/*.js 就是获取 lib 文件夹下的所有 js 后缀名的文件
 const glob = require('glob');
@@ -25,21 +26,6 @@ setPages = configs => {
           chunks: ['chunk-vendors', 'chunk-common', filename],
           inject: true,
       };
-
-      // if (configs) {
-      //     conf = merge(conf, configs)
-      // }
-
-      // if (process.env.NODE_ENV === 'production') {
-      //     conf = merge(conf, {
-      //         minify: {
-      //             removeComments: true, // 删除 html 中的注释代码
-      //             collapseWhitespace: true, // 删除 html 中的空白符
-      //             // removeAttributeQuotes: true // 删除 html 元素中属性的引号
-      //         },
-      //         chunksSortMode: 'manual'// 按 manual 的顺序引入
-      //     })
-      // }
       map[filename] = conf
   })
   console.log(map)
