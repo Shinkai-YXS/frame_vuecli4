@@ -6,6 +6,9 @@ const glob = require('glob');
 // const PAGE_PATH = path.resolve(__dirname, './src/pages');
 const PAGE_PATH = 'src/pages';
 
+const webpack = require('webpack')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+
 setPages = configs => {
   // handleEntry()
   let entryFiles = glob.sync(PAGE_PATH + '/**?/*.js')
@@ -42,6 +45,20 @@ module.exports = {
           '@': path.resolve(__dirname, './src'),
       }
     },
+    plugins: [
+      new webpack.DllReferencePlugin({
+        context: process.cwd(),
+        manifest: require('./public/vendor/vendor-manifest.json')
+      }),
+      new AddAssetHtmlPlugin({
+        // dll文件位置
+        filepath: path.resolve(__dirname, './public/vendor/*.js'),
+        // dll 引用路径
+        publicPath: './vendor',
+        // dll最终输出的目录
+        outputPath: './vendor'
+      }),
+    ]
   },
   // devServer: {
   //   index: '/', // 运行时，默认打开application1页面
