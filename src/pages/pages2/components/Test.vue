@@ -1,5 +1,5 @@
 <template>
-  <div>测试一下</div>
+  <div class="text_color">测试一下</div>
 </template>
 
 <script>
@@ -8,6 +8,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+  .text_color {
+    color: $red;
+  }
 </style>

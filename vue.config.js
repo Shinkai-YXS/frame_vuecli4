@@ -68,9 +68,16 @@ module.exports = {
         test: /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i,
         threshold: 10240,
         minRatio: 0.8
-    })
+      })
     ]
   },
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: `@import "./src/styles/_colors.scss";`
+      }
+    }
+  }
   // devServer: {
   //   index: '/', // 运行时，默认打开application1页面
   //   // 告诉dev-server在服务器启动后打开浏览器，将其设置true为打开默认浏览器
