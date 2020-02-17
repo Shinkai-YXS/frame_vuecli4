@@ -18,6 +18,11 @@ import Test from '../../components/Test.vue'
 export default {
   components: {
     HelloWorld, Test
+  },
+  mounted() {
+    setTimeout(() => {
+      this.$toast('测试')
+    }, 1000);
   }
 }
 </script>
