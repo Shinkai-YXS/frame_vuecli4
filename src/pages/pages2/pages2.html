@@ -22,4 +22,14 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      var src = 'https://cdn.staticfile.org/eruda/1.5.8/eruda.min.js';
+        // if (!/eruda=true/.test(window.location) && localStorage.getItem('active-eruda') != 'true') return;
+        var script = document.createElement('script');
+        script.setAttribute('src', src);
+        document.body.appendChild(script);
+        script.onload = function () {
+            eruda.init()
+        }
+    </script>
 </body>
